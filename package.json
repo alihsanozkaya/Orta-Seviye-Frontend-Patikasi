@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "Orta seviye frontend patikasi",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
   "author": "Ali İhsan Özkaya",
   "license": "ISC",
