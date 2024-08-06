@@ -1,7 +1,6 @@
 import React from "react";
 import { useWeather } from "../context/WeatherContext";
 
-// Gün adlarını İngilizce olarak almak için yardımcı fonksiyon
 const getDayName = (dateString) => {
   const date = new Date(dateString);
   const options = { weekday: "long" };
@@ -10,7 +9,11 @@ const getDayName = (dateString) => {
 
 const Weather = () => {
   const { list, setCity, cities, setUnits, data } = useWeather();
-
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = (today.getMonth() + 1).toString().padStart(2, '0');
+  const day = today.getDate().toString().padStart(2, '0');
+  const formattedDate = `${year}-${month}-${day}`;
   const handleChangeCity = (e) => {
     setCity(e.target.value);
   };
@@ -19,7 +22,6 @@ const Weather = () => {
     setUnits(e.target.value);
   };
 
-  // Verileri günlere göre gruplama ve saat 12:00'deki verileri alma
   const getWeatherAtNoon = (dataList) => {
     const groupedByDate = dataList.reduce((acc, curr) => {
       const date = curr.dt_txt.split(" ")[0];
@@ -37,11 +39,12 @@ const Weather = () => {
       const dayData = groupedByDate[date];
       const maxTemp = Math.max(...dayData.map((d) => d.main.temp_max));
       const minTemp = Math.min(...dayData.map((d) => d.main.temp_min));
-      const icon = dayData[0].weather[0].icon; // İlk veriyi kullanarak ikon seçimi
+      const icon = dayData[0].weather[0].icon;
       return { date, maxTemp, minTemp, icon };
     });
   };
   const dailyWeatherAtNoon = getWeatherAtNoon(list);
+  
   return (
     <div>
       <form>
@@ -69,9 +72,8 @@ const Weather = () => {
       <br />
       <div className="card-container d-flex flex-wrap">
         {dailyWeatherAtNoon.map((day, index) => (
-          <div className="card" style={{ width: "9rem" }} key={index}>
-            <h5>{getDayName(day.date)}</h5>
-
+          <div className={`card ${formattedDate === day.date ? "bg-border-weather" : ""}`} style={{ width: "9rem"}} key={index}>
+            <h5 className="mt-2">{getDayName(day.date).substring(0,3)}</h5>
             <img
               className="card-img-top"
               src={`https://openweathermap.org/img/wn/${day.icon}@2x.png`}

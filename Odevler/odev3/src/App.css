@@ -21,3 +21,8 @@
   align-items: center; /* Sıcaklık bilgilerini yatay olarak ortalar */
   text-align: center; /* Metni ortalar */
 }
+
+.bg-border-weather {
+  background-color: #ddd;
+  border: black 1px solid;
+}
