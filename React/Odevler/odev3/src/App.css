@@ -1,0 +1,28 @@
+.App {
+  text-align: center;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap; /* Kartların satırları sarmasını sağlar */
+  gap: 1rem; /* Kartlar arasına boşluk ekler */
+  justify-content: start; /* Kartları soldan hizalar */
+}
+
+.card {
+  display: flex;
+  flex-direction: column; /* Kart içindeki öğeleri dikey olarak hizalar */
+  align-items: center; /* Kart içindeki öğeleri yatay olarak ortalar */
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column; /* Sıcaklık bilgilerini dikey olarak hizalar */
+  align-items: center; /* Sıcaklık bilgilerini yatay olarak ortalar */
+  text-align: center; /* Metni ortalar */
+}
+
+.bg-border-weather {
+  background-color: #ddd;
+  border: black 1px solid;
+}
